@@ -92,6 +92,9 @@
             "platform": "serve",
             "cwd": "${workspaceRoot}",
             "devServerAddress": "localhost",
+            "target": "chrome",
+            "simulatePort": 8000,
+            "livereload": true,
             "sourceMaps": true,
             "ionicLiveReload": true
         },

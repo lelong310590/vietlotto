@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { ResultPage } from '../result/result';
 import { Map } from '../map/map';
 import { SalePoint } from '../salepoint/salepoint';
+import { CheckPage } from '../check/check';
 
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -22,6 +23,6 @@ export class TabsPage {
     this.tab1Root = Map;
     this.tab2Root = ResultPage;
     this.tab3Root = SalePoint;
-    this.tab4Root = ResultPage;
+    this.tab4Root = CheckPage;
   }
 }
