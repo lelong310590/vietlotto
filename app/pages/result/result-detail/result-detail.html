@@ -1,0 +1,121 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <ion-img src="images/logo.jpg" width="120" height="30" class="logo"></ion-img>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="page-wrapper result-detail-page">
+
+        <!--Kết quả mặc định-->
+        <div *ngIf="showNewestResult === true">
+            <div *ngFor="let data of searchResultJackpot">
+                <ion-img src="images/jackpot.png" width="150" height="44" class="jackpot-logo"></ion-img>
+                <p>Ngày quay thưởng: <span class="date">{{ data.date }}</span></p>
+                <button block class="money"><money>{{ data.jackpot_price | currency:'VND':true }}</money></button>
+
+                <ul class="result-ball-list" text-center>
+                    <li *ngFor="let ball of prizeResult">
+                        <div class="ball-wrapper">
+                            <div class="ball-circle">
+                                <div class="ball-number">{{ ball }}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="prize-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Giải thưởng</td>
+                                <td>Số lượng</td>
+                                <td>Giá trị (đ)</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jackpot</td>
+                                <td>{{ data.detail.jackpot.number }}</td>
+                                <td>{{ data.detail.jackpot.price | currency:'VND':true }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhất</td>
+                                <td>{{ data.detail.prize1.number }}</td>
+                                <td>{{ data.detail.prize1.price | currency:'VND':true }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhì</td>
+                                <td>{{ data.detail.prize2.number }}</td>
+                                <td>{{ data.detail.prize2.price | currency:'VND':true }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải ba</td>
+                                <td>{{ data.detail.prize3.number }}</td>
+                                <td>{{ data.detail.prize3.number | currency:'VND':true }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--Kết quả trả về-->
+        <div *ngIf="showNewestResult === false">
+            <div *ngFor="let data of returnResult">
+                <ion-img src="images/jackpot.png" width="150" height="44" class="jackpot-logo"></ion-img>
+                <p>Ngày quay thưởng: <span class="date">{{ data.date }}</span></p>
+                <button block class="money"><money>{{ data.jackpot_price }} đ</money></button>
+
+                <ul class="result-ball-list" text-center>
+                    <li *ngFor="let ball of returnprizeResult">
+                        <div class="ball-wrapper">
+                            <div class="ball-circle">
+                                <div class="ball-number">{{ ball }}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="prize-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Giải thưởng</td>
+                                <td>Số lượng</td>
+                                <td>Giá trị (đ)</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jackpot</td>
+                                <td>{{ data.detail.jackpot.number }}</td>
+                                <td>{{ data.detail.jackpot.price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhất</td>
+                                <td>{{ data.detail.prize1.number }}</td>
+                                <td>{{ data.detail.prize1.price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhì</td>
+                                <td>{{ data.detail.prize2.number }}</td>
+                                <td>{{ data.detail.prize2.price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải ba</td>
+                                <td>{{ data.detail.prize3.number }}</td>
+                                <td>{{ data.detail.prize3.number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <button block class="prize-view-more" (click)="datePicker()">Xem ngày khác</button>
+
+    </div>
+</ion-content>
