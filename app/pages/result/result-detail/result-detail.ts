@@ -86,6 +86,10 @@ export class ResultDetailPage {
     }
 
     public getDefaulResult() {
+        let loader = this.loadingCtrl.create({
+            content: "Đang tải kết quả...",
+        });
+        loader.present();
         let date = new Date();
         let curentDate = date.getFullYear().toString() + this.helper.formatNumber((date.getMonth() + 1).toString()) + this.helper.formatNumber(date.getDate().toString()); //Format lại định dạng ngày tháng
         let httpRequestListenner = this.http.get('http://loto.halogi.com/result?date=' + curentDate).map(res => res.json()).subscribe(
@@ -99,10 +103,13 @@ export class ResultDetailPage {
                     console.log('view leave');
                     httpRequestListenner.unsubscribe();
                 })
+
+                loader.dismiss();
                 
             },
             (error) => {
                 console.log(error);
+                loader.dismiss();
             }
         );
 

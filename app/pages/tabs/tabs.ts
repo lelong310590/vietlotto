@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 // Page import
 import { ResultPage } from '../result/result';
 import { Map } from '../map/map';
+import { SalePoint } from '../salepoint/salepoint';
 
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -20,7 +21,7 @@ export class TabsPage {
     // should be each tab's root Page
     this.tab1Root = Map;
     this.tab2Root = ResultPage;
-    this.tab3Root = ResultPage;
+    this.tab3Root = SalePoint;
     this.tab4Root = ResultPage;
   }
 }

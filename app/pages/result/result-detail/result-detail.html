@@ -67,7 +67,7 @@
             <div *ngFor="let data of returnResult">
                 <ion-img src="images/jackpot.png" width="150" height="44" class="jackpot-logo"></ion-img>
                 <p>Ngày quay thưởng: <span class="date">{{ data.date }}</span></p>
-                <button block class="money"><money>{{ data.jackpot_price }} đ</money></button>
+                <button block class="money"><money>{{ data.jackpot_price | currency:'VND':true }} đ</money></button>
 
                 <ul class="result-ball-list" text-center>
                     <li *ngFor="let ball of returnprizeResult">
@@ -92,22 +92,22 @@
                             <tr>
                                 <td>Jackpot</td>
                                 <td>{{ data.detail.jackpot.number }}</td>
-                                <td>{{ data.detail.jackpot.price }}</td>
+                                <td>{{ data.detail.jackpot.price | currency:'VND':true }}</td>
                             </tr>
                             <tr>
                                 <td>Giải nhất</td>
                                 <td>{{ data.detail.prize1.number }}</td>
-                                <td>{{ data.detail.prize1.price }}</td>
+                                <td>{{ data.detail.prize1.price | currency:'VND':true }}</td>
                             </tr>
                             <tr>
                                 <td>Giải nhì</td>
                                 <td>{{ data.detail.prize2.number }}</td>
-                                <td>{{ data.detail.prize2.price }}</td>
+                                <td>{{ data.detail.prize2.price | currency:'VND':true }}</td>
                             </tr>
                             <tr>
                                 <td>Giải ba</td>
                                 <td>{{ data.detail.prize3.number }}</td>
-                                <td>{{ data.detail.prize3.number }}</td>
+                                <td>{{ data.detail.prize3.price | currency:'VND':true }}</td>
                             </tr>
                         </tbody>
                     </table>
