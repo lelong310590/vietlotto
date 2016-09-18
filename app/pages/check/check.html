@@ -7,7 +7,29 @@
 </ion-header>
 
 <ion-content padding>
-    <div class="checkpage-wrapper">
-        <ion-img src="images/mega645.jpg" class="center-block mega645-logo"></ion-img>
+    <div class="checkpage-wrapper page-wrapper">
+        <ion-img src="images/mega645.jpg" class="center-block mega645-logo" width="130"></ion-img>
+        <div class="datepicker margin">
+            <p>Tra cứu kết quả sổ xố Mega 6 / 45</p>
+            <ion-list class="picker" (click)="picker()">
+                <ion-item>
+                    <span item-left>{{ curentDate }}</span>
+                    <button clear item-right><ion-icon name="calendar"></ion-icon></button>
+                </ion-item>
+            </ion-list>
+            <button block class="pickNumber" (click)="pickNumber(curentDate)">Chọn số</button>
+        </div>
+        <div class="current-result">
+            <p>Kết quả ngày: <span class="date">{{ curentDate }}</span></p>
+            <ul class="result-ball-list" text-center>
+                <li *ngFor="let item of currentResult" >
+                    <div class="ball-wrapper">
+                        <div class="ball-circle">
+                            <div class="ball-number">{{ item }}</div>
+                        </div>
+                    </div>
+                </li>
+             </ul>
+        </div>
     </div>
 </ion-content>

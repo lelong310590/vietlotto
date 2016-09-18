@@ -13,7 +13,7 @@
 .game-list p {
     color: #9e9e9e;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .game-list money {
@@ -24,10 +24,14 @@
     padding: 1rem;
     font-size: 1.8rem;
     font-weight: 600;
+    float: left;
+    text-align: center;
 }
 
 .comming-soon-btn {
     background: #3f51b5;
     text-transform: none;
     font-size: 1.4rem;
+    width: 100%;
+    text-align: center;
 }

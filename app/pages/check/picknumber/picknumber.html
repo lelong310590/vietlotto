@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>
+      CHỌN SỐ
+    </ion-title>
+    <ion-buttons end class="closemodal">
+      <button (click)="closeModal()">
+        <span primary showWhen="ios">Thoát</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="page-wrapper picknumber-wrapper">
+        <ion-list>
+              <ion-item>
+                <ion-label>Loại bao: </ion-label>
+                    <ion-select [(ngModel)]="pickType">
+                        <ion-option value="5">Bao 5 số</ion-option>
+                        <ion-option value="6">Bao 6 số</ion-option>
+                        <ion-option value="7">Bao 7 số</ion-option>
+                    </ion-select>
+                </ion-item>
+          </ion-list>
+    </div>
+</ion-content>

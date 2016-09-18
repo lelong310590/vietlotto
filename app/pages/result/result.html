@@ -7,29 +7,25 @@
 </ion-header>
 
 <ion-content padding>
-    <div class="result">
-        <ion-grid>
-            <ion-row class="game-list" (click)="openPage()">
-                <ion-col width-50><img src="images/mega645.png"></ion-col>
-                <ion-col width-50>
-                    <h2 class="">Mega 6/45</h2>
-                    <p>Số xố điện toán tự chọn. Tổng giải thưởng lên tới</p>
-                    <money>20,456,000,000 đ</money>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </div>
+    <ion-list no-lines class="result">
+        <ion-item class="game-list" (click)="openPage()">
+            <ion-thumbnail item-left>
+                <img src="images/mega645.png">
+            </ion-thumbnail>
+            <h2>Mega 6/45</h2>
+            <p>Số xố điện toán tự chọn.</p>
+            <money>20,456,000,000 đ</money>
+        </ion-item>
+    </ion-list>
 
-    <div class="result">
-        <ion-grid>
-            <ion-row class="game-list" (click)="commingSoon()">
-                <ion-col width-50><img src="images/3dmax.png"></ion-col>
-                <ion-col width-50>
-                    <h2 class="">Lotto 3D Max</h2>
-                    <p>Tính năng này đang được phát triển</p>
-                    <button class="comming-soon-btn">Cooming soon...</button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </div>
+    <ion-list no-lines class="result">
+         <ion-item class="game-list" (click)="commingSoon()">
+            <ion-thumbnail item-left>
+                <img src="images/3dmax.png">
+            </ion-thumbnail>
+            <h2>Lotto 3D Max</h2>
+            <p>Tính năng này đang được phát triển.</p>
+            <button class="comming-soon-btn">Cooming soon...</button>
+        </ion-item>
+    </ion-list>
 </ion-content>
