@@ -1,0 +1,73 @@
+<ion-content class="backdrop">
+    <div class="result-wrapper">
+        <div class="modal-header">
+            <button clear (click)="closeModal()">
+                <span primary showWhen="ios">Thoát</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div *ngIf="resultStatus == true">
+                <ion-img src="images/win.png" class="center-block result-promotion" width="100" ></ion-img>
+                <p class="result-text" text-center>Chúc mứng bạn đã trúng giải</p>
+                <button class="money"><money>{{ prizeWin | currency:'VND':true }}</money></button>
+                <div class="prize-table" *ngFor="let data of prizeTable" >
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Giải thưởng</td>
+                                <td>Số lượng</td>
+                                <td>Giá trị (đ)</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jackpot</td>
+                                <td>{{ data.detail.jackpot.number }}</td>
+                                <td>{{ data.detail.jackpot.price | currency:'VND':true }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhất</td>
+                                <td>{{ data.detail.prize1.number }}</td>
+                                <td>{{ data.detail.prize1.price | currency:'VND':true }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhì</td>
+                                <td>{{ data.detail.prize2.number }}</td>
+                                <td>{{ data.detail.prize2.price | currency:'VND':true }}</td>
+                            </tr>
+                            <tr>
+                                <td>Giải ba</td>
+                                <td>{{ data.detail.prize3.number }}</td>
+                                <td>{{ data.detail.prize3.price | currency:'VND':true }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div *ngIf="resultStatus == false">
+                <ion-img src="images/sad.png" class="center-block" width="100" class="result-promotion"></ion-img>
+                <p class="result-text" text-center>Rất tiếc bạn không trúng giải nào</p>
+                <p text-center>Dãy số kết quả</p>
+                <ul class="result-ball-list" text-center>
+                    <li *ngFor="let item of prizeResult" >
+                        <div class="ball-wrapper">
+                            <div class="ball-circle">
+                                <div class="ball-number">{{ item }}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <p text-center>Dãy số bạn chọn</p>
+                <ul class="chossen-ball-list" text-center>
+                    <li *ngFor="let item of selectedBall" >
+                        <div class="ball-wrapper">
+                            <div class="ball-number">{{ item }}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ion-content>

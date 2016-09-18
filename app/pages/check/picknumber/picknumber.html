@@ -15,14 +15,66 @@
 <ion-content padding>
     <div class="page-wrapper picknumber-wrapper">
         <ion-list>
-              <ion-item>
-                <ion-label>Loại bao: </ion-label>
-                    <ion-select [(ngModel)]="pickType">
-                        <ion-option value="5">Bao 5 số</ion-option>
-                        <ion-option value="6">Bao 6 số</ion-option>
-                        <ion-option value="7">Bao 7 số</ion-option>
-                    </ion-select>
-                </ion-item>
-          </ion-list>
+            <ion-item>
+              <ion-label>Loại bao: </ion-label>
+                  <ion-select [(ngModel)]="pickType">
+                      <ion-option value="5">Bao 5 số</ion-option>
+                      <ion-option value="6">Bao 6 số</ion-option>
+                      <ion-option value="7">Bao 7 số</ion-option>
+                      <ion-option value="8">Bao 8 số</ion-option>
+                      <ion-option value="9">Bao 9 số</ion-option>
+                      <ion-option value="10">Bao 10 số</ion-option>
+                      <ion-option value="11">Bao 11 số</ion-option>
+                      <ion-option value="12">Bao 12 số</ion-option>
+                      <ion-option value="13">Bao 13 số</ion-option>
+                      <ion-option value="14">Bao 14 số</ion-option>
+                      <ion-option value="15">Bao 15 số</ion-option>
+                      <ion-option value="16">Bao 16 số</ion-option>
+                      <ion-option value="17">Bao 17 số</ion-option>
+                      <ion-option value="18">Bao 18 số</ion-option>
+                  </ion-select>
+              </ion-item>
+        </ion-list>
+        <p>Các số đã chọn:</p>
+        <div class="selected-ball">
+            <ul>
+                <li *ngFor="let item of pickerBall" >
+                    <div class="selected-ball-wrapper">
+                        <span class="selected-ball-number">{{ item }}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <p>Bảng số: </p>
+        <table class="ball-list">
+            <tr>
+                <td (click)="c1 = !c1; pickBall(1, c1)" [ngClass]="{'checked' : c1, '' : !c1}" ng-disabled="" >01</td>
+                <td (click)="c2 = !c2; pickBall(2, c2)" [ngClass]="{'checked' : c2, '' : !c2}" >02</td>
+                <td (click)="c3 = !c3; pickBall(3, c3)" [ngClass]="{'checked' : c3, '' : !c3}" >03</td>
+                <td (click)="c4 = !c4; pickBall(4, c4)" [ngClass]="{'checked' : c4, '' : !c4}" >04</td>
+                <td (click)="c5 = !c5; pickBall(5, c5)" [ngClass]="{'checked' : c5, '' : !c5}" >05</td>
+                <td (click)="c6 = !c6; pickBall(6, c6)" [ngClass]="{'checked' : c6, '' : !c6}" >06</td>
+                <td (click)="c7 = !c7; pickBall(7, c7)" [ngClass]="{'checked' : c7, '' : !c7}" >07</td>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+                <td>01</td>
+            </tr>
+        </table>
+        <button block class="check-result" (click)="checkResult()">Kiểm tra</button>
     </div>
 </ion-content>

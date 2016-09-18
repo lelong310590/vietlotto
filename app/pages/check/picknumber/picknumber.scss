@@ -7,11 +7,61 @@
 }
 
 .picknumber-wrapper .item-select {
-    border: 1px dashed #212121!important;
+    border: 1px dotted #212121!important;
     border-color: #212121!important;
-    border-radius: 1rem;
 }
 
 .picknumber-wrapper ion-label {
     color: #212121;
+}
+
+.selected-ball {
+    background: #b71c1c;
+    padding: 1rem;
+    border-radius: 1rem;
+    min-height: 66px;
+}
+
+.selected-ball ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.selected-ball ul li {
+    display: inline-block;
+    list-style: none;
+    color: #212121;
+    font-weight: 900;
+    margin-bottom: .5rem;
+    margin-right: .2rem;
+}
+
+.selected-ball .selected-ball-wrapper {
+    background: #fff;
+    border-radius: 100%;
+    padding: 1.2rem;
+}
+
+.ball-list {
+    width: 100%;
+}
+
+.ball-list td {
+    border: 1px solid #b7b7b7;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1.1rem;
+    max-width: calc(100%/7);
+}
+
+.ball-list td.checked {
+    background: #01579b;
+    color: #fff;
+    border-color: #01579b;
+}
+
+.check-result {
+    background: #d32f2f;
+    margin: 2rem 0;
 }

@@ -112,9 +112,6 @@ export class ResultDetailPage {
                 loader.dismiss();
             }
         );
-
-       
-       
     }
     
 }

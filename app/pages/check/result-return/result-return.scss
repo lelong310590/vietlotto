@@ -1,0 +1,69 @@
+.backdrop {
+    background: rgba(0,0,0,.7);
+}
+
+.result-wrapper {
+    background: #fff;
+    opacity: 1;
+    z-index: 9999999;
+    position: relative;
+    margin: 8rem 2.5rem;
+}
+
+.modal-header {
+    background: #e53935;
+    color: #fff;
+}
+
+.modal-header button {
+    color: #fff;
+}
+
+.modal-body {
+    padding-bottom: 2rem;
+}
+
+.result-promotion {
+    margin: 2.5rem auto;
+}
+
+.result-text {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #ececec;
+}
+
+.chossen-ball-list {
+    padding: 0;
+}
+
+.chossen-ball-list li {
+    list-style: none;
+    display: inline-block;
+}
+
+.chossen-ball-list li .ball-wrapper {
+    color: #212121;
+    font-weight: 900;
+    background: #fff;
+    border: 4px solid #cccccc;
+    border-radius: 100%;
+    padding: .5rem;
+}
+
+.modal-body .money {
+    box-shadow: none;
+    background: #eeeeee;
+    text-transform: none;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    display: block;
+}
+
+.modal-body .money money {
+    color: #c62828;
+    font-size: 3rem;
+}
+
+.modal-body .prize-table {
+    margin: 0 2rem;
+}

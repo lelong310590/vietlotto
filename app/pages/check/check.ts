@@ -24,6 +24,8 @@ export class CheckPage {
     private currentResult: Array<string> = [];
     private showNewestResult: boolean = true;
 
+    private dateParam: any;
+
     constructor(private platform: Platform, private loadingCtrl: LoadingController, private helper: Helper, private http: Http, private navController: NavController, public modalCtrl: ModalController) {
         this.getCurrentResult();
     }
@@ -49,6 +51,7 @@ export class CheckPage {
 
                 let dateStr = date.getFullYear().toString() + this.helper.formatNumber((date.getMonth() + 1).toString()) + this.helper.formatNumber(date.getDate().toString()); //Format lại định dạng ngày tháng
                 // console.log(dateStr);
+                this.dateParam = dateStr;
                 let httpRequestListenner = this.http.get('http://loto.halogi.com/result?date=' + dateStr).map(res => res.json()).subscribe(
                     (data) => {
                         this.currentResult = []; // Xóa mảng ball kết quả trả về trước khi truyền vào dữ liệu mới
@@ -85,6 +88,7 @@ export class CheckPage {
     public getCurrentResult() {
         this.curentDate = this.helper.formatNumber(new Date().getDate().toString()) + '-' + this.helper.formatNumber((new Date().getMonth() + 1).toString()) + '-' + new Date().getFullYear().toString();
         let paramDate = new Date().getFullYear().toString() + this.helper.formatNumber((new Date().getMonth() + 1).toString()) + this.helper.formatNumber(new Date().getDate().toString());
+        this.dateParam = paramDate;
         this.http.get('http://loto.halogi.com/result?date=' + paramDate).map(res => res.json()).subscribe((data) => {
             data.jackpot.split(",").forEach(i => {
                 this.currentResult.push(this.helper.formatNumber(i));  // Format lại định dạng số trả về
@@ -93,7 +97,7 @@ export class CheckPage {
     }
 
     public pickNumber(date) {
-        let modal = this.modalCtrl.create(PickNumber);
+        let modal = this.modalCtrl.create(PickNumber, {date: this.dateParam});
         modal.present();
     }
 
