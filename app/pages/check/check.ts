@@ -5,7 +5,7 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 // Plugin import
-import { DatePicker, Toast } from 'ionic-native';
+import { DatePicker, Toast, SpinnerDialog  } from 'ionic-native';
 
 // Services import
 import { Helper } from '../../services/helper';
@@ -86,6 +86,7 @@ export class CheckPage {
     }
 
     public getCurrentResult() {
+        SpinnerDialog.show('', 'Đang tải dữ liệu kết quả...');
         this.curentDate = this.helper.formatNumber(new Date().getDate().toString()) + '-' + this.helper.formatNumber((new Date().getMonth() + 1).toString()) + '-' + new Date().getFullYear().toString();
         let paramDate = new Date().getFullYear().toString() + this.helper.formatNumber((new Date().getMonth() + 1).toString()) + this.helper.formatNumber(new Date().getDate().toString());
         this.dateParam = paramDate;
@@ -93,12 +94,15 @@ export class CheckPage {
             data.jackpot.split(",").forEach(i => {
                 this.currentResult.push(this.helper.formatNumber(i));  // Format lại định dạng số trả về
             });
+            SpinnerDialog.hide();
         })
     }
 
     public pickNumber(date) {
+        SpinnerDialog.show('', 'Đang tải bảng số...');
         let modal = this.modalCtrl.create(PickNumber, {date: this.dateParam});
         modal.present();
+        SpinnerDialog.hide();
     }
 
 }

@@ -1,7 +1,7 @@
 // Base import
 import { Component } from '@angular/core';
 import { Platform, ionicBootstrap } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
+import { StatusBar, Splashscreen } from 'ionic-native';
 
 // Page import
 import { TabsPage } from './pages/tabs/tabs';

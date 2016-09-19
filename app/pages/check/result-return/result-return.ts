@@ -5,7 +5,7 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 // Plugin import
-import { Toast } from 'ionic-native';
+import { Toast, SpinnerDialog } from 'ionic-native';
 
 // Services import
 import { Helper } from '../../../services/helper';
@@ -32,6 +32,10 @@ export class ResultReturn {
                 private helper: Helper, 
                 private loadingCtrl: LoadingController) 
     {
+        
+    }
+
+    ionViewLoaded() {
         // console.log('fuck');
         this.selectedBall = this.navParam.get('ball');
         if (this.navParam.get('data').total == 0) {
@@ -48,38 +52,42 @@ export class ResultReturn {
     }
 
     public getBallResultFail() {
+        SpinnerDialog.show('', 'Đang tải dữ liệu kết quả');
         let httpRequestListenner = this.http.get('http://loto.halogi.com/result?date=' + this.navParam.get('date')).map(res => res.json()).subscribe(
             (data) => {
                 data.jackpot.split(",").forEach(i => {
                     this.prizeResult.push(this.helper.formatNumber(i));  // Format lại định dạng số trả về
                 });
                 // console.log(this.prizeResult);
-
-                this.navController.viewDidLeave.subscribe(() => {
-                    // console.log('view leave');
-                    httpRequestListenner.unsubscribe();
-                })
+                SpinnerDialog.hide();
+                
             },
             (error) => {
-                // console.log(error);
+                Toast.show("Không tải được dữ liệu, Hãy kiểm tra lại kết nối mạng", '2500', 'bottom').subscribe(
+                    toast => {
+                        console.log(toast);
+                    }
+                );
             }
         );
     }
 
     public getBallResultWin() {
+        SpinnerDialog.show('', 'Đang tải dữ liệu kết quả');
         this.prizeWin = this.navParam.get('data').total;
         let httpRequestListenner = this.http.get('http://loto.halogi.com/result?date=' + this.navParam.get('date')).map(res => res.json()).subscribe(
             (data) => {
                 this.prizeTable.push(data);
                 // console.log(this.prizeTable);
+                SpinnerDialog.hide();
 
-                this.navController.viewDidLeave.subscribe(() => {
-                    // console.log('view leave');
-                    httpRequestListenner.unsubscribe();
-                })
             },
             (error) => {
-                // console.log(error);
+                Toast.show("Không tải được dữ liệu, Hãy kiểm tra lại kết nối mạng", '2500', 'bottom').subscribe(
+                    toast => {
+                        console.log(toast);
+                    }
+                );
             }
         );
     }

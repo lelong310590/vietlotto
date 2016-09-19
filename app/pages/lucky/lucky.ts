@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 // Plugin import
-import { Toast } from 'ionic-native';
+import { Toast, SpinnerDialog } from 'ionic-native';
 
 // Page import
 import { Map } from '../../pages/map/map';
@@ -18,16 +18,13 @@ export class LuckySale  {
     private store: any;
 
     constructor(private http: Http, private loadingCtrl: LoadingController, private navController: NavController) {
-        let loading = this.loadingCtrl.create({
-            content: 'Đang tải...'
-        });
-        loading.present();
+        SpinnerDialog.show('', 'Đang tải dữ liệu cửa hàng...');
         let httpRequest = this.http.get('http://loto.halogi.com/store_lucky').map(res => res.json()).subscribe(data => {
             this.store = data;
-            loading.dismiss();
             setTimeout(function() {
                 httpRequest.unsubscribe();
             }, 2500);
+            SpinnerDialog.hide();
         })
 
         

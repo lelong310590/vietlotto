@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 // Plugin import
-import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, Toast, GoogleMapsMarkerOptions, GoogleMapsMarker, GoogleMapsMarkerIcon } from 'ionic-native';
+import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, Toast, GoogleMapsMarkerOptions, GoogleMapsMarker, GoogleMapsMarkerIcon, SpinnerDialog, Splashscreen } from 'ionic-native';
 
 
 @Component({
@@ -15,14 +15,14 @@ import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, Toast, Googl
 export class Map {
 
     constructor(private navController: NavController, private platform: Platform, private http: Http, private navParams: NavParams) {
-        console.log(this.navParams.get('lat'));
-        console.log(this.navParams.get('lng'));
         platform.ready().then(() => {
             this.initalizeMap();
+            Splashscreen.hide();
         });
     }
 
     public initalizeMap() {
+        SpinnerDialog.show('', 'Đang tải dữ liệu bản đồ...');
         this.http.get('http://loto.halogi.com/store').map(res => res.json()).subscribe(data => {
 
             let map = new GoogleMap('map', {
@@ -69,6 +69,8 @@ export class Map {
                     });
                 }
             });
+
+            SpinnerDialog.hide();
 
         });
     }

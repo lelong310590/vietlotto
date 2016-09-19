@@ -108,7 +108,11 @@ export class ResultDetailPage {
                 
             },
             (error) => {
-                console.log(error);
+                Toast.show("Không tải được dữ liệu, Hãy kiểm tra lại kết nối mạng", '2500', 'bottom').subscribe(
+                    toast => {
+                        console.log(toast);
+                    }
+                );
                 loader.dismiss();
             }
         );
