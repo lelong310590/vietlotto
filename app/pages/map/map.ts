@@ -1,6 +1,6 @@
 // Base import
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -14,7 +14,9 @@ import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, Toast, Googl
 
 export class Map {
 
-    constructor(private navController: NavController, private platform: Platform, private http: Http) {
+    constructor(private navController: NavController, private platform: Platform, private http: Http, private navParams: NavParams) {
+        console.log(this.navParams.get('lat'));
+        console.log(this.navParams.get('lng'));
         platform.ready().then(() => {
             this.initalizeMap();
         });

@@ -10,6 +10,9 @@ import { Toast } from 'ionic-native';
 // Services import
 import { Helper } from '../../../services/helper';
 
+// Page import
+import { CheckPage } from '../../../pages/check/check';
+
 @Component({
     templateUrl: 'build/pages/check/result-return/result-return.html',
     providers: [Helper]
@@ -36,7 +39,7 @@ export class ResultReturn {
             this.getBallResultFail();
         } else {
             this.resultStatus = true; // Trúng giải
-            this.getBallResultWin()
+            this.getBallResultWin();
         }
     }
 

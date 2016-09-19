@@ -1,7 +1,13 @@
 .lucky-store ion-label {
-    white-space: normal
+    white-space: normal;
+    overflow: visible;
 }
 
-.lucky-store ion-label .item h2 {
+.lucky-store h2 {
+    font-size: 1.3rem;
+}
+
+.lucky-store .store-phone {
     font-size: 1.2rem;
+    margin-top: .5rem;
 }

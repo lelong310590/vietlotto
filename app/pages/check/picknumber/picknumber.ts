@@ -25,7 +25,7 @@ export class PickNumber {
     private pickerBall: Array<any> = [];
     private paramCheck: Array<any> = []; // Mảng chứa Param
 
-    constructor(private viewController: ViewController, private helper: Helper, private http: Http, private navParams: NavParams, private modalCtrl: ModalController ) {
+    constructor(private viewController: ViewController, private helper: Helper, private http: Http, private navParams: NavParams, private modalCtrl: ModalController, private loadingCtrl: LoadingController ) {
         
     }
 
@@ -34,41 +34,72 @@ export class PickNumber {
     }
 
     public pickBall(ballNo, status) {
-        if (status == true) {
-            this.pickedQlt++;
-            this.pickerBall.push(this.helper.formatNumber(ballNo));
-            this.paramCheck.push(ballNo);
+        if (this.pickedQlt >= this.pickType) {
+            // Toast.show("Bạn đã chọn đủ số, hãy bấm vào nút kiểm tra kết quả", '2500', 'bottom').subscribe(
+            //     toast => {
+            //         // console.log(toast);
+            //     }
+            // );
+            if (status == true) {
+                // this.pickedQlt++;
+                // this.pickerBall.push(this.helper.formatNumber(ballNo));
+                // this.paramCheck.push(ballNo);
+                console.log('Bạn đã chọn đủ số, hãy bấm vào nút kiểm tra kết quả');
+            } else {
+                // Xóa số trong mảng số chọn      
+                let i = this.pickerBall.indexOf(this.helper.formatNumber(ballNo));
+                if (i != -1) {
+                    this.pickerBall.splice(i, 1);
+                }
+    
+                // Xóa số trong mảng số chọn      
+                let j = this.paramCheck.indexOf(ballNo);
+                if (j != -1) {
+                    this.paramCheck.splice(j, 1);
+                }
+    
+                this.pickedQlt--;
+            }
         } else {
-            // Xóa số trong mảng số chọn      
-            let i = this.pickerBall.indexOf(this.helper.formatNumber(ballNo));
-            if (i != -1) {
-                this.pickerBall.splice(i, 1);
+            if (status == true) {
+                this.pickedQlt++;
+                this.pickerBall.push(this.helper.formatNumber(ballNo));
+                this.paramCheck.push(ballNo);
+            } else {
+                // Xóa số trong mảng số chọn      
+                let i = this.pickerBall.indexOf(this.helper.formatNumber(ballNo));
+                if (i != -1) {
+                    this.pickerBall.splice(i, 1);
+                }
+    
+                // Xóa số trong mảng số chọn      
+                let j = this.paramCheck.indexOf(ballNo);
+                if (j != -1) {
+                    this.paramCheck.splice(j, 1);
+                }
+    
+                this.pickedQlt--;
             }
-
-            // Xóa số trong mảng số chọn      
-            let j = this.paramCheck.indexOf(ballNo);
-            if (j != -1) {
-                this.paramCheck.splice(j, 1);
-            }
-
-            this.pickedQlt--;
         }
+        
     }
 
     public checkResult() {
         // console.log(this.paramCheck.toString());
         // console.log(this.navParams.get('date'));
-        // if (this.pickedQlt < this.pickType) {
-        //     Toast.show("Bạn vẫn chưa chọn đủ số", '2500', 'bottom').subscribe(
-        //         toast => {
-        //             // console.log(toast);
-        //         }
-        //     );
-        // } else {
-        this.http.get('http://loto.halogi.com/check?ticket=' + this.paramCheck.toString() + '&date=' + this.navParams.get('date')).map(res => res.json()).subscribe((data) => {
-            let modal = this.modalCtrl.create(ResultReturn, {data: data, date: this.navParams.get('date'), ball: this.pickerBall}, {showBackdrop: true, enableBackdropDismiss: true});
-            modal.present();
-        })
+        if (this.pickedQlt < this.pickType) {
+            Toast.show("Bạn vẫn chưa chọn đủ số để kiểm tra", '2500', 'bottom').subscribe(
+                toast => {
+                    // console.log(toast);
+                }
+            );
+        } else {
+            
+            this.http.get('http://loto.halogi.com/check?ticket=' + this.paramCheck.toString() + '&date=' + this.navParams.get('date')).map(res => res.json()).subscribe((data) => {
+                let modal = this.modalCtrl.create(ResultReturn, {data: data, date: this.navParams.get('date'), ball: this.pickerBall}, {showBackdrop: true, enableBackdropDismiss: true});
+                modal.present();
+            })
+        }
         // }
     }
 }
