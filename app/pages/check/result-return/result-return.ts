@@ -52,14 +52,12 @@ export class ResultReturn {
     }
 
     public getBallResultFail() {
-        SpinnerDialog.show('', 'Đang tải dữ liệu kết quả');
         let httpRequestListenner = this.http.get('http://loto.halogi.com/result?date=' + this.navParam.get('date')).map(res => res.json()).subscribe(
             (data) => {
                 data.jackpot.split(",").forEach(i => {
                     this.prizeResult.push(this.helper.formatNumber(i));  // Format lại định dạng số trả về
                 });
                 // console.log(this.prizeResult);
-                SpinnerDialog.hide();
                 
             },
             (error) => {
@@ -73,13 +71,11 @@ export class ResultReturn {
     }
 
     public getBallResultWin() {
-        SpinnerDialog.show('', 'Đang tải dữ liệu kết quả');
         this.prizeWin = this.navParam.get('data').total;
         let httpRequestListenner = this.http.get('http://loto.halogi.com/result?date=' + this.navParam.get('date')).map(res => res.json()).subscribe(
             (data) => {
                 this.prizeTable.push(data);
                 // console.log(this.prizeTable);
-                SpinnerDialog.hide();
 
             },
             (error) => {

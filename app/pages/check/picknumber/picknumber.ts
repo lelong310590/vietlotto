@@ -33,69 +33,55 @@ export class PickNumber {
         this.viewController.dismiss();
     }
 
-    public pickBall(ballNo, status) {
-        if (this.pickedQlt >= this.pickType) {
-            // Toast.show("Bạn đã chọn đủ số, hãy bấm vào nút kiểm tra kết quả", '2500', 'bottom').subscribe(
-            //     toast => {
-            //         // console.log(toast);
-            //     }
-            // );
-            if (status == true) {
-                // this.pickedQlt++;
-                // this.pickerBall.push(this.helper.formatNumber(ballNo));
-                // this.paramCheck.push(ballNo);
-                console.log('Bạn đã chọn đủ số, hãy bấm vào nút kiểm tra kết quả');
-            } else {
-                // Xóa số trong mảng số chọn      
-                let i = this.pickerBall.indexOf(this.helper.formatNumber(ballNo));
-                if (i != -1) {
-                    this.pickerBall.splice(i, 1);
-                }
-    
-                // Xóa số trong mảng số chọn      
-                let j = this.paramCheck.indexOf(ballNo);
-                if (j != -1) {
-                    this.paramCheck.splice(j, 1);
-                }
-    
-                this.pickedQlt--;
-            }
-        } else {
-            if (status == true) {
-                this.pickedQlt++;
-                this.pickerBall.push(this.helper.formatNumber(ballNo));
-                this.paramCheck.push(ballNo);
-            } else {
-                // Xóa số trong mảng số chọn      
-                let i = this.pickerBall.indexOf(this.helper.formatNumber(ballNo));
-                if (i != -1) {
-                    this.pickerBall.splice(i, 1);
-                }
-    
-                // Xóa số trong mảng số chọn      
-                let j = this.paramCheck.indexOf(ballNo);
-                if (j != -1) {
-                    this.paramCheck.splice(j, 1);
-                }
-    
-                this.pickedQlt--;
+    public onChangeBao(newValue) {
+        // console.log(newValue);
+        // location.reload();
+        // document.getElementsByClassName("checked").className
+    }
+
+    public pickBall(ballNo,  viewId) {
+        let ballIdx = this.paramCheck.indexOf(ballNo);
+        if (ballIdx != -1){
+            document.getElementById(viewId).className = "unchecked";
+            this.paramCheck.splice(ballIdx, 1);
+            this.pickedQlt--;
+
+            let i = this.pickerBall.indexOf(this.helper.formatNumber(ballNo));
+            if (i != -1) {
+                this.pickerBall.splice(i, 1);
             }
         }
-        
+        else{
+            if(this.pickedQlt>=this.pickType){
+                console.log('Bạn đã chọn đủ số, hãy bấm vào nút kiểm tra kết quả');
+            }
+            else{
+                 this.pickerBall.push(this.helper.formatNumber(ballNo));
+                 this.paramCheck.push(ballNo);
+                 document.getElementById(viewId).className = "checked";
+                 this.pickedQlt++;
+            }
+        }
     }
 
     public checkResult() {
         // console.log(this.paramCheck.toString());
         // console.log(this.navParams.get('date'));
         if (this.pickedQlt < this.pickType) {
+            // console.log('Bạn vẫn chưa chọn đủ số để kiểm tra');
+            // console.log("paramCheck " + this.paramCheck);
             Toast.show("Bạn vẫn chưa chọn đủ số để kiểm tra", '2500', 'bottom').subscribe(
                 toast => {
                     // console.log(toast);
                 }
             );
         } else {
-            
+            let loader = this.loadingCtrl.create({
+                content: "Please wait...",
+            });
+            loader.present();
             this.http.get('http://loto.halogi.com/check?ticket=' + this.paramCheck.toString() + '&date=' + this.navParams.get('date')).map(res => res.json()).subscribe((data) => {
+                loader.dismiss();
                 let modal = this.modalCtrl.create(ResultReturn, {data: data, date: this.navParams.get('date'), ball: this.pickerBall}, {showBackdrop: true, enableBackdropDismiss: true});
                 modal.present();
             })

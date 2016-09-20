@@ -42,10 +42,10 @@ export class Map {
                         'target': coord,
                         'zoom': 18,
                     });
-                    Toast.show("Chọn một đại lý bán vé ở gần bạn và bắt đầu tham gia", '3000', 'bottom').subscribe(
-                        toast => {
-                        }
-                    );
+                    // Toast.show("Chọn một đại lý bán vé ở gần bạn và bắt đầu tham gia", '3000', 'bottom').subscribe(
+                    //     toast => {
+                    //     }
+                    // );
                 })
 
                 addMarkers(data, function (markers) {

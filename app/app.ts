@@ -1,7 +1,7 @@
 // Base import
 import { Component } from '@angular/core';
-import { Platform, ionicBootstrap } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Platform, ionicBootstrap, AlertController  } from 'ionic-angular';
+import { StatusBar, Splashscreen, Network } from 'ionic-native';
 
 // Page import
 import { TabsPage } from './pages/tabs/tabs';
@@ -14,7 +14,7 @@ export class MyApp {
 
     public rootPage: any;
 
-    constructor(private platform: Platform) {
+    constructor(private platform: Platform, public alertCtrl: AlertController) {
         this.rootPage = TabsPage;
         this.initializeApp();
     }
@@ -25,7 +25,21 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             StatusBar.overlaysWebView(true); // let status var overlay webview
 			StatusBar.backgroundColorByHexString('#B71C1C');
+            this.platform.registerBackButtonAction(this.exitApp, 0);
+            let disconnectSubscription = Network.onDisconnect().subscribe(() => {
+                let alert = this.alertCtrl.create({
+                    title: 'Lỗi kết nối!',
+                    subTitle: 'Bạn vui lòng kiểm tra lại kết nối mạng hoặc Wifi!',
+                    buttons: ['OK']
+                });
+                alert.present();
+            });
+            
         });
+    }
+
+    public exitApp() {
+
     }
 }
 
