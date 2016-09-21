@@ -1,9 +1,15 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            <ion-img src="images/logo.jpg" width="120" height="30" class="logo"></ion-img>
+    <ion-toolbar>
+        <ion-title text-center>
+            Mega 6/45
         </ion-title>
-    </ion-navbar>
+        <ion-buttons end class="closemodal">
+            <button (click)="closeModal()">
+        <span primary showWhen="ios">Thoát</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>

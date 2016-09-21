@@ -78,3 +78,13 @@ ion-content {
 .toolbar-title {
     color: #fff;
 }
+
+
+ion-navbar.toolbar.show-navbar .bar-button-default {
+    color: #fff;
+    position: absolute;
+}
+
+.tab-button[aria-selected=true] {
+    color: #fff;
+}

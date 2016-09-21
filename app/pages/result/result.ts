@@ -1,6 +1,6 @@
 // Base import
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController, Page } from 'ionic-angular';
 
 // Plugin import
 import { Toast } from 'ionic-native';
@@ -8,17 +8,17 @@ import { Toast } from 'ionic-native';
 // Page import
 import { ResultDetailPage } from '../result/result-detail/result-detail';
 
-@Component({
+@Page({
     templateUrl: 'build/pages/result/result.html'
 })
 export class ResultPage {
 
-    constructor(public navController: NavController) {
+    constructor(public navController: NavController, private viewCtrl: ViewController) {
         
     }
 
     public openPage() {
-        this.navController.setRoot(ResultDetailPage);
+        this.navController.push(ResultDetailPage);
     }
 
     public commingSoon() {
@@ -26,6 +26,11 @@ export class ResultPage {
             toast => {
             }
         );
+    }
+
+    onPageDidUnload() {
+        const index = this.viewCtrl.index;
+        this.navController.remove(index);
     }
 
 }

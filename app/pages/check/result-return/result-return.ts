@@ -1,6 +1,6 @@
 // Base import
 import { Component } from '@angular/core';
-import { NavController, Platform, LoadingController, ViewController, NavParams } from 'ionic-angular';
+import { NavController, Platform, LoadingController, ViewController, NavParams, Page } from 'ionic-angular';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -13,7 +13,7 @@ import { Helper } from '../../../services/helper';
 // Page import
 import { CheckPage } from '../../../pages/check/check';
 
-@Component({
+@Page({
     templateUrl: 'build/pages/check/result-return/result-return.html',
     providers: [Helper]
 })
@@ -26,7 +26,7 @@ export class ResultReturn {
     private prizeTable: Array<any> = [];
 
     constructor(private navParam: NavParams, 
-                private viewcontroller: ViewController, 
+                private viewCtrl: ViewController, 
                 private http: Http, 
                 private navController: NavController, 
                 private helper: Helper, 
@@ -35,8 +35,7 @@ export class ResultReturn {
         
     }
 
-    ionViewLoaded() {
-        // console.log('fuck');
+    onPageLoaded() {
         this.selectedBall = this.navParam.get('ball');
         if (this.navParam.get('data').total == 0) {
             this.resultStatus = false; // Không trúng
@@ -48,7 +47,7 @@ export class ResultReturn {
     }
 
     public closeModal() {
-        this.viewcontroller.dismiss();
+        this.viewCtrl.dismiss();
     }
 
     public getBallResultFail() {
@@ -63,7 +62,7 @@ export class ResultReturn {
             (error) => {
                 Toast.show("Không tải được dữ liệu, Hãy kiểm tra lại kết nối mạng", '2500', 'bottom').subscribe(
                     toast => {
-                        console.log(toast);
+                        // console.log(toast);
                     }
                 );
             }
@@ -81,10 +80,15 @@ export class ResultReturn {
             (error) => {
                 Toast.show("Không tải được dữ liệu, Hãy kiểm tra lại kết nối mạng", '2500', 'bottom').subscribe(
                     toast => {
-                        console.log(toast);
+                        // console.log(toast);
                     }
                 );
             }
         );
+    }
+
+    onPageDidUnload() {
+        const index = this.viewCtrl.index;
+        this.navController.remove(index);
     }
 }

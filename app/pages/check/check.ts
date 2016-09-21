@@ -1,6 +1,6 @@
 // Base import
 import { Component } from '@angular/core';
-import { NavController, Platform, LoadingController, ModalController  } from 'ionic-angular';
+import { NavController, Platform, LoadingController, ModalController, Page, ViewController } from 'ionic-angular';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -13,7 +13,7 @@ import { Helper } from '../../services/helper';
 // Page import
 import { PickNumber } from '../check/picknumber/picknumber';
 
-@Component({
+@Page({
     templateUrl: 'build/pages/check/check.html',
     providers: [Helper]
 })
@@ -26,7 +26,7 @@ export class CheckPage {
 
     private dateParam: any;
 
-    constructor(private platform: Platform, private loadingCtrl: LoadingController, private helper: Helper, private http: Http, private navController: NavController, public modalCtrl: ModalController) {
+    constructor(private platform: Platform, private loadingCtrl: LoadingController, private helper: Helper, private http: Http, private navController: NavController, public modalCtrl: ModalController, private viewCtrl: ViewController) {
         this.getCurrentResult();
     }
 
@@ -99,10 +99,12 @@ export class CheckPage {
     }
 
     public pickNumber(date) {
-        SpinnerDialog.show('', 'Đang tải bảng số...');
-        let modal = this.modalCtrl.create(PickNumber, {date: this.dateParam});
-        modal.present();
-        SpinnerDialog.hide();
+        this.navController.push(PickNumber, {date: this.dateParam});
+    }
+
+    onPageDidUnload() {
+        const index = this.viewCtrl.index;
+        this.navController.remove(index);
     }
 
 }

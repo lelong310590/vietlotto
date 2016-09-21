@@ -1,6 +1,6 @@
 // Base import
 import { Component } from '@angular/core';
-import { NavController, Platform, LoadingController } from 'ionic-angular';
+import { NavController, Platform, LoadingController, ViewController, Page } from 'ionic-angular';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -10,7 +10,7 @@ import { DatePicker, Toast } from 'ionic-native';
 // Services import
 import { Helper } from '../../../services/helper';
 
-@Component({
+@Page({
     templateUrl: 'build/pages/result/result-detail/result-detail.html',
     providers: [Helper]
 })
@@ -23,7 +23,7 @@ export class ResultDetailPage {
 
     private showNewestResult: boolean = true;
 
-    constructor(public navController: NavController, private platform: Platform, private http: Http, private helper: Helper, private loadingCtrl: LoadingController) {
+    constructor(public navController: NavController, private platform: Platform, private http: Http, private helper: Helper, private loadingCtrl: LoadingController, private viewCtrl: ViewController) {
         this.getDefaulResult();
     }
 
@@ -100,7 +100,7 @@ export class ResultDetailPage {
                 });
 
                 this.navController.viewDidLeave.subscribe(() => {
-                    console.log('view leave');
+                    // console.log('view leave');
                     httpRequestListenner.unsubscribe();
                 })
 
@@ -117,5 +117,9 @@ export class ResultDetailPage {
             }
         );
     }
-    
+
+    public closemodal() {
+        this.viewCtrl.dismiss();
+    }
+
 }

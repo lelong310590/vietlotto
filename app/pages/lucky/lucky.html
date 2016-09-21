@@ -8,9 +8,9 @@
 
 <ion-content padding>
     <ion-list [virtualScroll]="store">
-        <ion-item *virtualItem="let item">
+        <ion-item *virtualItem="let item" class="lucky-store">
             <ion-thumbnail item-left>
-            <ion-img [src]="images/store.png"></ion-img>
+            <img src="images/store.png" />
             </ion-thumbnail>
             <h2>{{ item.address }}</h2>
             <p class="store-phone"><ion-icon name="call"></ion-icon> {{ item.phone }}</p>

@@ -34,7 +34,7 @@ export class MyApp {
                 });
                 alert.present();
             });
-            
+            Splashscreen.hide();
         });
     }
 
@@ -44,20 +44,19 @@ export class MyApp {
 }
 
 ionicBootstrap(MyApp, [], {
-    tabsLayout: 'icon-hide',
     tabsHighlight: true,
     platforms: {
         ios: {
             tabsPlacement: 'bottom',
             pageTransition: 'ios',
             iconMode: 'ios',
-            activator: 'highlight'
+            // activator: 'highlight'
         },
         android: {
-            tabsPlacement: 'top',
+            tabsPlacement: 'bottom',
             pageTransition: 'md',
             iconMode: 'md',
-            activator: 'ripple'
+            // activator: 'ripple'
         }
     }
 });
