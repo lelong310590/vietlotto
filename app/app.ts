@@ -50,13 +50,13 @@ ionicBootstrap(MyApp, [], {
             tabsPlacement: 'bottom',
             pageTransition: 'ios',
             iconMode: 'ios',
-            // activator: 'highlight'
+            activator: 'highlight'
         },
         android: {
             tabsPlacement: 'bottom',
             pageTransition: 'md',
             iconMode: 'md',
-            // activator: 'ripple'
+            activator: 'ripple'
         }
     }
 });
